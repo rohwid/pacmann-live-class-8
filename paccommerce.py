@@ -123,28 +123,32 @@ class Membership:
     # method untuk menampilkan membership yang dimiliki
     # dari database yang dimiliki
     def get_membership_status(self, username):
+        membership = None
+        
         for key, value in self.data.items():
-            if key == username and value == 'Platinum':
-                tables = [self._get_benefit_table()[0]]
+            if key == username:
+                membership = value
+                
+        if membership == 'Platinum':
+            tables = [self._get_benefit_table()[0]]
+            header = ["Membership", "Discount", "Another Benefit"]
 
-                header = ["Membership", "Discount", "Another Benefit"]
+            print(f"Halo {key}, berikut status membership kamu: \n")
+            print(tabulate(tables, header))
+        elif membership == 'Gold':
+            tables = [self._get_benefit_table()[1]]
+            header = ["Membership", "Discount", "Another Benefit"]
+            
+            print(f"Halo {key}, berikut status membership kamu: \n")
+            print(tabulate(tables, header))
+        elif membership == 'Silver':
+            tables = [self._get_benefit_table()[2]]
+            header = ["Membership", "Discount", "Another Benefit"]
 
-                print(f"Halo {key}, berikut status membership kamu: \n")
-                print(tabulate(tables, header))
-            elif key == username and value == 'Gold':
-                tables = [self._get_benefit_table()[1]]
-
-                header = ["Membership", "Discount", "Another Benefit"]
-
-                print(f"Halo {key}, berikut status membership kamu: \n")
-                print(tabulate(tables, header))
-            elif key == username and value == 'Silver':
-                tables = [self._get_benefit_table()[2]]
-
-                header = ["Membership", "Discount", "Another Benefit"]
-
-                print(f"Halo {key}, berikut status membership kamu: \n")
-                print(tabulate(tables, header))
+            print(f"Halo {key}, berikut status membership kamu: \n")
+            print(tabulate(tables, header))
+        else:
+            print('Username not found!')
     
     # method untuk menghitung final price berdasarkan membership
     def calculate_price(self, username, list_harga):
@@ -179,7 +183,7 @@ class Membership:
 
             return total_harga
         else:
-            print('Username tidak ditemukan!')
+            print('Username not found!')
             
 if __name__ == "__main__":
     data = {
