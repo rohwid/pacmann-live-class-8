@@ -254,4 +254,4 @@ if __name__ == "__main__":
     
     print("\nBambang shopping.")
     list_harga = [300_000, 150_000, 1_250_000, 15_000]
-    print(bambang.calculate_price("Ana", list_harga))
+    print(bambang.calculate_price("Bambang", list_harga))
